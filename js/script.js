@@ -124,3 +124,24 @@ paymentMethod.addEventListener('change', () => { //adding event listener for pay
         }
     }
 });
+
+///////////////
+// VALIDATION//
+///////////////
+
+// EMAIL
+// ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$
+//
+// NAME
+// (*[A-Za-z] *[A-Za-z])
+//
+// OTHER
+// *[A-Za-z]
+//
+// CREDIT CARD
+// ^5[1-5]\d{14}$
+//
+// CVV
+// [0-9]{3}
+//
+// [0-9]{5}
