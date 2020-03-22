@@ -44,6 +44,7 @@ const cvvField = document.getElementById('cvv');
 const expirationMonthSelect = document.getElementById('exp-month');
 const expirationYearSelect = document.getElementById('exp-year');
 
+
 ////////////////////////////
 // JOB ROLE FUNCTIONALITY //
 ////////////////////////////
