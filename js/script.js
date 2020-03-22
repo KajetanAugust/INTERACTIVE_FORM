@@ -39,7 +39,9 @@ bitcoin.style.display= 'none';
 jobRole.addEventListener('change', () =>{ //adding event listener to Job Role dropdown select
     const result =  jobRole.options[jobRole.selectedIndex].text; //getting select text value
     if(result.toLowerCase() === 'other') { //checking if he selected option value is exual to other
-        otherJobRole.style.display ='initial'; // showing job role window
+        otherJobRole.style.display ='initial'; //showing job role input
+    } else {
+        otherJobRole.style.display ='none'; //hiding job role input
     }
 });
 
