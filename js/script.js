@@ -31,6 +31,18 @@ paypal.style.display= 'none';
 const bitcoin = document.getElementById('bitcoin');
 bitcoin.style.display= 'none';
 
+//Validation selectors
+const nameField = document.getElementById('name');
+const emailField = document.getElementById('mail');
+const jobRoleSelect = document.getElementById('title');
+const otherJobRoleField = document.getElementById('other-title');
+const activitiesInputs = document.querySelectorAll('.activities input');
+const paymentSelect = document.getElementById('payment');
+const creditCardNumberField = document.getElementById('cc-num');
+const zipCodeField = document.getElementById('zip');
+const cvvField = document.getElementById('cvv');
+const expirationMonthSelect = document.getElementById('exp-month');
+const expirationYearSelect = document.getElementById('exp-year');
 
 ////////////////////////////
 // JOB ROLE FUNCTIONALITY //
