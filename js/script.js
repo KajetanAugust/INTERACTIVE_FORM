@@ -44,19 +44,22 @@ const cvvField = document.getElementById('cvv');
 const expirationMonthSelect = document.getElementById('exp-month');
 const expirationYearSelect = document.getElementById('exp-year');
 
+// regex codes
 
+const nameRegex =/(\w+)\s(\w+)/;
+const emailRegex =/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 //////////////////////////
 // VALIDATION FUNCTIONS //
 //////////////////////////
 
-//name
-
-const checkingName = (name) => {
-    return /(\w+)\s(\w+)/.test(name)
+const validating = (name, regexCode) => {
+    return regexCode.test(name)
 };
 
+//name
+
 nameField.addEventListener('keyup', () =>{
-    if(checkingName(nameField.value) === true) {
+    if(validating(nameField.value, nameRegex) === true) {
         console.log('ok')
     } else {
         console.log('not ok')
@@ -65,12 +68,8 @@ nameField.addEventListener('keyup', () =>{
 
 //email
 
-const checkingEmail = (email) => {
-    return /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(email)
-};
-
 emailField.addEventListener('keyup', () =>{
-    if(checkingEmail(emailField.value) === true) {
+    if(validating(emailField.value, emailRegex) === true) {
         console.log('ok')
     } else {
         console.log('not ok')
