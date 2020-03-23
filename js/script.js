@@ -37,13 +37,89 @@ const emailField = document.getElementById('mail');
 const jobRoleSelect = document.getElementById('title');
 const otherJobRoleField = document.getElementById('other-title');
 const activitiesInputs = document.querySelectorAll('.activities input');
-const paymentSelect = document.getElementById('payment');
+const paymentMethodSelect = document.getElementById('payment');
 const creditCardNumberField = document.getElementById('cc-num');
 const zipCodeField = document.getElementById('zip');
 const cvvField = document.getElementById('cvv');
 const expirationMonthSelect = document.getElementById('exp-month');
 const expirationYearSelect = document.getElementById('exp-year');
 
+
+//////////////////////////
+// VALIDATION FUNCTIONS //
+//////////////////////////
+
+//name
+
+const checkingName = (name) => {
+    return /(\w+)\s(\w+)/.test(name)
+};
+
+nameField.addEventListener('keyup', () =>{
+    if(checkingName(nameField.value) === true) {
+        console.log('ok')
+    } else {
+        console.log('not ok')
+    }
+});
+
+//email
+
+const checkingEmail = (email) => {
+    return /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(email)
+};
+
+emailField.addEventListener('keyup', () =>{
+    if(checkingEmail(emailField.value) === true) {
+        console.log('ok')
+    } else {
+        console.log('not ok')
+    }
+});
+
+//job role
+const checkingJob = (otherJob) => {
+    return /[a-z]i*/.test(otherJob)
+};
+
+jobRoleSelect.addEventListener('change', () =>{
+    if(jobRole.options[jobRole.selectedIndex].text.toLowerCase() === 'other') {
+        otherJobRoleField.addEventListener('keyup',() => {
+            if(checkingJob(otherJobRoleField.value) === true){
+                console.log('ok')
+            } else {
+                console.log('not ok')
+            }
+        });
+    } else {
+        console.log('ok');
+    }
+});
+
+
+// activities
+const checkingActivities = () => {
+
+};
+
+activitiesSection.addEventListener('change', () => {
+    let count = 0;
+    for( let i = 0; i < activitiesInputs.length; i++){
+        if(activitiesInputs[i].getAttribute('if-checked') === true){
+            count++
+        }
+    }
+    console.log(count);
+    if(count>0){
+        console.log('ok')
+    }else {
+        console.log('not ok')
+    }
+});
+
+const checkingPayment = () => {
+
+};
 
 ////////////////////////////
 // JOB ROLE FUNCTIONALITY //
