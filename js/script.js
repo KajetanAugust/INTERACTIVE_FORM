@@ -41,13 +41,17 @@ const paymentMethodSelect = document.getElementById('payment');
 const creditCardNumberField = document.getElementById('cc-num');
 const zipCodeField = document.getElementById('zip');
 const cvvField = document.getElementById('cvv');
-const expirationMonthSelect = document.getElementById('exp-month');
-const expirationYearSelect = document.getElementById('exp-year');
+const registerButton = document.querySelector('button');
 
 // regex codes
 
 const nameRegex =/(\w+)\s(\w+)/;
 const emailRegex =/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+const jobRoleRegex = /[a-z]i*/;
+const creditCardRegex = /^\d{13,16}$/;
+const cvvRegex = /[0-9]{3}/;
+const zipRegex = /[0-9]{5}/;
+
 //////////////////////////
 // VALIDATION FUNCTIONS //
 //////////////////////////
@@ -55,6 +59,10 @@ const emailRegex =/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 const validating = (name, regexCode) => {
     return regexCode.test(name)
 };
+
+////////////////////////////////
+// VALIDATION EVENT LISTENERS //
+////////////////////////////////
 
 //name
 
@@ -76,15 +84,11 @@ emailField.addEventListener('keyup', () =>{
     }
 });
 
-//job role
-const checkingJob = (otherJob) => {
-    return /[a-z]i*/.test(otherJob)
-};
 
 jobRoleSelect.addEventListener('change', () =>{
     if(jobRole.options[jobRole.selectedIndex].text.toLowerCase() === 'other') {
         otherJobRoleField.addEventListener('keyup',() => {
-            if(checkingJob(otherJobRoleField.value) === true){
+            if(validating(otherJobRoleField.value, jobRoleRegex) === true){
                 console.log('ok')
             } else {
                 console.log('not ok')
@@ -96,29 +100,98 @@ jobRoleSelect.addEventListener('change', () =>{
 });
 
 
-// activities
-const checkingActivities = () => {
+// payment
 
-};
+paymentMethodSelect.addEventListener('change', () =>{
+    if(paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'credit card') {
+        creditCardNumberField.addEventListener('keyup',() => {
+            if(validating(creditCardNumberField.value, creditCardRegex) === true){
+                console.log('ok')
+            } else {
+                console.log('not ok')
+            }
+        });
 
-activitiesSection.addEventListener('change', () => {
-    let count = 0;
-    for( let i = 0; i < activitiesInputs.length; i++){
-        if(activitiesInputs[i].getAttribute('if-checked') === true){
-            count++
-        }
-    }
-    console.log(count);
-    if(count>0){
-        console.log('ok')
-    }else {
-        console.log('not ok')
+        cvvField.addEventListener('keyup',() => {
+            if(validating(cvvField.value, cvvRegex) === true){
+                console.log('ok')
+            } else {
+                console.log('not ok')
+            }
+        });
+
+        zipCodeField.addEventListener('keyup',() => {
+            if(validating(zipCodeField.value, zipRegex) === true){
+                console.log('ok')
+            } else {
+                console.log('not ok')
+            }
+        });
+    } else {
+        console.log('ok');
     }
 });
 
-const checkingPayment = () => {
+//register button
 
-};
+registerButton.addEventListener('click', (e) =>{
+    if(validating(nameField.value, nameRegex) === false) {
+        console.log('name false');
+        e.preventDefault()
+    }
+
+
+
+
+    if(validating(emailField.value, emailRegex) === false) {
+        console.log('email false');
+        e.preventDefault()
+    }
+
+
+
+    if(jobRole.options[jobRole.selectedIndex].text.toLowerCase() === 'other') {
+            if(validating(otherJobRoleField.value, jobRoleRegex) === false){
+                console.log('job role false');
+                e.preventDefault()
+            }
+    }
+
+
+    let count = 0;
+    for(let i = 0; i < activitiesInputs.length; i++) {
+        if(activitiesInputs[i].checked ){
+            count ++;
+        }
+    }
+    if(count === 0) {
+        console.log('check activity');
+        e.preventDefault()
+    }
+
+    if(paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'credit card') {
+
+        if(validating(creditCardNumberField.value, creditCardRegex) === false) {
+            console.log('check credit card number');
+            e.preventDefault()
+        }
+
+        if(validating(zipCodeField.value, zipRegex) === false){
+            console.log('check zip code');
+            e.preventDefault()
+        }
+
+        if(validating(cvvField.value, cvvRegex) === false){
+            console.log('check credit card CVV');
+            e.preventDefault()
+        }
+    } else if(paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'select method') {
+        console.log('choose payment method');
+        e.preventDefault()
+    }
+
+
+});
 
 ////////////////////////////
 // JOB ROLE FUNCTIONALITY //
