@@ -264,14 +264,15 @@ shirtDesign.addEventListener('change', () => { //adding event listener to Shirt 
     for (let i = 0; i < shirtColorOptions.length; i++) { //looping through the color options
         if (shirtColorOptions[i].textContent.includes(shirtDesign.options[shirtDesign.selectedIndex].textContent.substr(8)) !== true) {
             //if the selected design doesn't match available colors for this design the color option is disabled
-            shirtColorOptions[i].disabled = true;
+            shirtColorOptions[i].disabled = true; //disabling not matched colors
         } else {
             if(shirtDesign.options[shirtDesign.selectedIndex].textContent.substr(8) === 'JS Puns'){
-                shirtColorOptions[i].selected = false;
-                shirtColorOptions[1].selected = true;
-            } else{
-                shirtColorOptions[i].selected = false;
-                shirtColorOptions[4].selected = true;
+                //if chosen design is equal to JS Puns first color option available for JS Puns is selected
+                shirtColorOptions[i].selected = false; //unselecting other options
+                shirtColorOptions[1].selected = true; //selecting first color for JS Puns
+            } else{ //else, the first option for I <3 JS is chosen
+                shirtColorOptions[i].selected = false; //unselecting other options
+                shirtColorOptions[4].selected = true; //selecting first color for I <3 JS
             }
             shirtColorOptions[i].disabled = false;//else, the color option is active
 
