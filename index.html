@@ -22,10 +22,14 @@
         
         <label for="name">Name:</label>
         <input type="text" id="name" name="user-name" autofocus>
-        
+        <div id='name-alert-div'>
+          <!--          ALERT GOES HERE-->
+        </div>
         <label for="mail">Email:</label>
         <input type="email" id="mail" name="user-email">
-        
+        <div id='email-alert-div'>
+          <!--          ALERT GOES HERE-->
+        </div>
         <label for="title">Job Role</label>
         <select id="title" name="user-title">
           <option value="full-stack js developer">Full Stack JavaScript Developer</option>
@@ -36,6 +40,9 @@
           <option value="other">Other</option>
         </select>
         <input type='text' id='other-title' name='other-title' placeholder='Your Job Role'>
+        <div id='jobrole-alert-div'>
+          <!--  ALERT GOES HERE-->
+        </div>
       </fieldset>
       
       <fieldset class="shirt">
@@ -77,7 +84,11 @@
       </fieldset>
 
       <fieldset class="activities">
+
         <legend>Register for Activities</legend>
+        <div id='activities-alert-div'>
+          <!--  ALERT GOES HERE-->
+        </div>
           <label>
             <input type="checkbox" name="all" data-cost="200"> Main Conference — $200
           </label>
@@ -111,28 +122,40 @@
         <legend>Payment Info</legend>
 
         <label for="payment">I'm going to pay with:</label>
+
         <select id="payment" name="user-payment">
           <option value="select method">Select Payment Method</option>
           <option value="credit card">Credit Card</option>
           <option value="paypal">PayPal</option>
           <option value="bitcoin">Bitcoin</option>
         </select>
-
+        <div id='payment-alert-div'>
+          <!--  ALERT GOES HERE-->
+        </div>
         <div id="credit-card" class="credit-card">
 
           <div class="col-6 col">
             <label for="cc-num">Card Number:</label>
         	  <input id="cc-num" name="user-cc-num" type="text">
+            <div id='creditcard-alert-div'>
+              <!--  ALERT GOES HERE-->
+            </div>
           </div>
 
           <div class="col-3 col">
             <label for="zip">Zip Code:</label>
-            <input id="zip" name="user-zip" type="text"> 
+            <input id="zip" name="user-zip" type="text">
+            <div id='zip-alert-div'>
+              <!--  ALERT GOES HERE-->
+            </div>
           </div>
 
           <div class="col-3 col">
             <label for="cvv">CVV:</label>
-            <input id="cvv" name="user-cvv" type="text"> 
+            <input id="cvv" name="user-cvv" type="text">
+            <div id='cvv-alert-div'>
+              <!--  ALERT GOES HERE-->
+            </div>
           </div>
 
           <label for="exp-month">Expiration Date:</label>

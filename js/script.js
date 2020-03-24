@@ -43,11 +43,40 @@ const zipCodeField = document.getElementById('zip');
 const cvvField = document.getElementById('cvv');
 const registerButton = document.querySelector('button');
 
+//validation errors
+const nameWarning = `<p class='warning' id='name-warning'>Name field must contain at least 4 characters</p>`;
+const nameError = `<p class='error' id='name-error'> Name field can't be empty!</p>`;
+
+const emailWarning = `<p class='warning'>This is not valid email address</p>`;
+const emailError = `<p class='error'>Email field can't be empty!</p>`;
+
+const jobRoleError =`<p class='error'>Please enter your job role!</p>`;
+
+const activitiesError =`<p class='error'>At least one activity must be selected!</p>`;
+
+const paymentError =`<p class='error'>Please select payment method!</p>`;
+
+const creditCardError =`<p class='error'>Please enter your credit card number</p>`;
+const zipError =`<p class='error'>Please enter your zip code</p>`;
+const cvvError =`<p class='error'>Please enter your card cvv</p>`;
+
+//error divs
+
+const nameErrorDiv = document.getElementById('name-alert-div');
+const emailErrorDiv = document.getElementById('email-alert-div');
+const jobroleErrorDiv = document.getElementById('jobrole-alert-div');
+const activitiesErrorDiv = document.getElementById('activities-alert-div');
+const paymentErrorDiv = document.getElementById('payment-alert-div');
+const cardErrorDiv = document.getElementById('creditcard-alert-div');
+const zipErrorDiv = document.getElementById('zip-alert-div');
+const cvvErrorDiv = document.getElementById('cvv-alert-div');
+
+
 // regex codes
 
-const nameRegex = /(\w+)\s(\w+)/;
+const nameRegex = /\w{3,}/;
 const emailRegex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-const jobRoleRegex = /[a-z]i*/;
+const jobRoleRegex = /\w{3,}/;
 const creditCardRegex = /^\d{13,16}$/;
 const cvvRegex = /[0-9]{3}/;
 const zipRegex = /[0-9]{5}/;
@@ -66,39 +95,43 @@ const validating = (name, regexCode) => {
 
 //name
 
-nameField.addEventListener('keyup', () => {
-    if (validating(nameField.value, nameRegex) === true) {
-        console.log('ok')
-    } else {
-        console.log('not ok')
+nameField.addEventListener('keydown', () => {
+    if(nameField.value === '') {
+        nameErrorDiv.innerHTML = nameError;
+    } else if (validating(nameField.value, nameRegex) === false) {
+        nameErrorDiv.innerHTML = nameWarning;
+    }else {
+        nameErrorDiv.innerHTML = '';
     }
 });
 
 //email
 
 emailField.addEventListener('keyup', () => {
-    if (validating(emailField.value, emailRegex) === true) {
-        console.log('ok')
+    if(emailField.value === ''){
+        emailErrorDiv.innerHTML = emailError;
+    }else if (validating(emailField.value, emailRegex) === false) {
+        emailErrorDiv.innerHTML = emailWarning;
     } else {
-        console.log('not ok')
+        emailErrorDiv.innerHTML = '';
     }
 });
 
+//job role
 
 jobRoleSelect.addEventListener('change', () => {
     if (jobRole.options[jobRole.selectedIndex].text.toLowerCase() === 'other') {
-        otherJobRoleField.addEventListener('keyup', () => {
-            if (validating(otherJobRoleField.value, jobRoleRegex) === true) {
-                console.log('ok')
-            } else {
-                console.log('not ok')
+        otherJobRoleField.addEventListener('keydown', () => {
+            if (validating(otherJobRoleField.value, jobRoleRegex) === false) {
+                jobroleErrorDiv.innerHTML = jobRoleError;
+            }else {
+                jobroleErrorDiv.innerHTML ='';
             }
         });
     } else {
         console.log('ok');
     }
 });
-
 
 // payment
 
