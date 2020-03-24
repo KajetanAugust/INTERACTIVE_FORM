@@ -55,8 +55,6 @@ const jobRoleWarning = `<p class='warning'>Job Role field must contain at least 
 
 const activitiesError = `<p class='error'>At least one activity must be selected!</p>`;
 
-const paymentError = `<p class='error'>Please select payment method!</p>`;
-
 const creditCardError = `<p class='error'>Please enter your credit card number!</p>`;
 const creditCardWarning = `<p class='warning'>Credit card number must be 13-16 digits long.</p>`;
 
@@ -72,7 +70,6 @@ const nameErrorDiv = document.getElementById('name-alert-div');
 const emailErrorDiv = document.getElementById('email-alert-div');
 const jobroleErrorDiv = document.getElementById('jobrole-alert-div');
 const activitiesErrorDiv = document.getElementById('activities-alert-div');
-const paymentErrorDiv = document.getElementById('payment-alert-div');
 const cardErrorDiv = document.getElementById('creditcard-alert-div');
 const zipErrorDiv = document.getElementById('zip-alert-div');
 const cvvErrorDiv = document.getElementById('cvv-alert-div');
@@ -241,9 +238,6 @@ registerButton.addEventListener('click', (e) => { //adding event listener for re
             cvvErrorDiv.innerHTML = cvvWarning; //displaying error message
             e.preventDefault() //preventing form submission
         }
-    } else if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'select method') { //checking if payment was chosen
-        paymentErrorDiv.innerHTML = paymentError; //displaying error message
-        e.preventDefault() //preventing form submission
     }
 
 });
@@ -270,9 +264,17 @@ shirtDesign.addEventListener('change', () => { //adding event listener to Shirt 
     for (let i = 0; i < shirtColorOptions.length; i++) { //looping through the color options
         if (shirtColorOptions[i].textContent.includes(shirtDesign.options[shirtDesign.selectedIndex].textContent.substr(8)) !== true) {
             //if the selected design doesn't match available colors for this design the color option is disabled
-            shirtColorOptions[i].setAttribute('disabled', '')
+            shirtColorOptions[i].disabled = true;
         } else {
-            shirtColorOptions[i].removeAttribute('disabled');//else, the color option is active
+            if(shirtDesign.options[shirtDesign.selectedIndex].textContent.substr(8) === 'JS Puns'){
+                shirtColorOptions[i].selected = false;
+                shirtColorOptions[1].selected = true;
+            } else{
+                shirtColorOptions[i].selected = false;
+                shirtColorOptions[4].selected = true;
+            }
+            shirtColorOptions[i].disabled = false;//else, the color option is active
+
         }
     }
 });
