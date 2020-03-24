@@ -44,21 +44,28 @@ const cvvField = document.getElementById('cvv');
 const registerButton = document.querySelector('button');
 
 //validation errors
-const nameWarning = `<p class='warning' id='name-warning'>Name field must contain at least 4 characters</p>`;
+
 const nameError = `<p class='error' id='name-error'> Name field can't be empty!</p>`;
+const nameWarning = `<p class='warning' id='name-warning'>Name field must contain at least 3 characters.</p>`;
 
-const emailWarning = `<p class='warning'>This is not valid email address</p>`;
 const emailError = `<p class='error'>Email field can't be empty!</p>`;
+const emailWarning = `<p class='warning'>This is not valid email address!</p>`;
 
-const jobRoleError =`<p class='error'>Please enter your job role!</p>`;
+const jobRoleError = `<p class='error'>Please enter your job role!</p>`;
+const jobRoleWarning = `<p class='warning'>Job Role field must contain at least 4 characters.</p>`;
 
-const activitiesError =`<p class='error'>At least one activity must be selected!</p>`;
+const activitiesError = `<p class='error'>At least one activity must be selected!</p>`;
 
-const paymentError =`<p class='error'>Please select payment method!</p>`;
+const paymentError = `<p class='error'>Please select payment method!</p>`;
 
-const creditCardError =`<p class='error'>Please enter your credit card number</p>`;
-const zipError =`<p class='error'>Please enter your zip code</p>`;
-const cvvError =`<p class='error'>Please enter your card cvv</p>`;
+const creditCardError = `<p class='error'>Please enter your credit card number!</p>`;
+const creditCardWarning = `<p class='warning'>Credit card number must be 13-16 digits long.</p>`;
+
+const zipError = `<p class='error'>Please enter your zip code</p>`;
+const zipWarning = `<p class='warning'>Zip Code field must contain 5 digits.</p>`;
+
+const cvvError = `<p class='error'>Please enter your card cvv</p>`;
+const cvvWarning = `<p class='warning'>CVV field must contain 3 digits.</p>`;
 
 //error divs
 
@@ -74,12 +81,12 @@ const cvvErrorDiv = document.getElementById('cvv-alert-div');
 
 // regex codes
 
-const nameRegex = /\w{3,}/;
+const nameRegex = /^[a-z]{3,}$/;
 const emailRegex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 const jobRoleRegex = /\w{3,}/;
 const creditCardRegex = /^\d{13,16}$/;
-const cvvRegex = /[0-9]{3}/;
-const zipRegex = /[0-9]{5}/;
+const cvvRegex = /^[0-9]{3}$/;
+const zipRegex = /^[0-9]{5}$/;
 
 //////////////////////////
 // VALIDATION FUNCTIONS //
@@ -95,22 +102,22 @@ const validating = (name, regexCode) => {
 
 //name
 
-nameField.addEventListener('keydown', () => {
-    if(nameField.value === '') {
+nameField.addEventListener('input', () => {
+    if (nameField.value === '') {
         nameErrorDiv.innerHTML = nameError;
     } else if (validating(nameField.value, nameRegex) === false) {
         nameErrorDiv.innerHTML = nameWarning;
-    }else {
+    } else {
         nameErrorDiv.innerHTML = '';
     }
 });
 
 //email
 
-emailField.addEventListener('keyup', () => {
-    if(emailField.value === ''){
+emailField.addEventListener('input', () => {
+    if (emailField.value === '') {
         emailErrorDiv.innerHTML = emailError;
-    }else if (validating(emailField.value, emailRegex) === false) {
+    } else if (validating(emailField.value, emailRegex) === false) {
         emailErrorDiv.innerHTML = emailWarning;
     } else {
         emailErrorDiv.innerHTML = '';
@@ -121,11 +128,11 @@ emailField.addEventListener('keyup', () => {
 
 jobRoleSelect.addEventListener('change', () => {
     if (jobRole.options[jobRole.selectedIndex].text.toLowerCase() === 'other') {
-        otherJobRoleField.addEventListener('keydown', () => {
+        otherJobRoleField.addEventListener('input', () => {
             if (validating(otherJobRoleField.value, jobRoleRegex) === false) {
                 jobroleErrorDiv.innerHTML = jobRoleError;
-            }else {
-                jobroleErrorDiv.innerHTML ='';
+            } else {
+                jobroleErrorDiv.innerHTML = '';
             }
         });
     } else {
@@ -138,30 +145,35 @@ jobRoleSelect.addEventListener('change', () => {
 paymentMethodSelect.addEventListener('change', () => {
     if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'credit card') {
         creditCardNumberField.addEventListener('keyup', () => {
-            if (validating(creditCardNumberField.value, creditCardRegex) === true) {
-                console.log('ok')
+            if (creditCardNumberField.value === '') {
+                cardErrorDiv.innerHTML = creditCardError;
+            } else if (validating(creditCardNumberField.value, creditCardRegex) === false) {
+                cardErrorDiv.innerHTML = creditCardWarning;
             } else {
-                console.log('not ok')
+                cardErrorDiv.innerHTML = '';
+            }
+        });
+
+
+        zipCodeField.addEventListener('keyup', () => {
+            if (zipCodeField.value === '') {
+                zipErrorDiv.innerHTML = zipError;
+            } else if (validating(zipCodeField.value, zipRegex) === false) {
+                zipErrorDiv.innerHTML = zipWarning;
+            } else {
+                zipErrorDiv.innerHTML = '';
             }
         });
 
         cvvField.addEventListener('keyup', () => {
-            if (validating(cvvField.value, cvvRegex) === true) {
-                console.log('ok')
+            if (cvvField.value === '') {
+                cvvErrorDiv.innerHTML = cvvError;
+            } else if (validating(cvvField.value, cvvRegex) === false) {
+                cvvErrorDiv.innerHTML = cvvWarning;
             } else {
-                console.log('not ok')
+                cvvErrorDiv.innerHTML = '';
             }
         });
-
-        zipCodeField.addEventListener('keyup', () => {
-            if (validating(zipCodeField.value, zipRegex) === true) {
-                console.log('ok')
-            } else {
-                console.log('not ok')
-            }
-        });
-    } else {
-        console.log('ok');
     }
 });
 
@@ -169,18 +181,18 @@ paymentMethodSelect.addEventListener('change', () => {
 
 registerButton.addEventListener('click', (e) => {
     if (validating(nameField.value, nameRegex) === false) {
-        console.log('name false');
+        nameErrorDiv.innerHTML = nameError;
         e.preventDefault()
     }
 
     if (validating(emailField.value, emailRegex) === false) {
-        console.log('email false');
+        emailErrorDiv.innerHTML = emailError;
         e.preventDefault()
     }
 
     if (jobRole.options[jobRole.selectedIndex].text.toLowerCase() === 'other') {
         if (validating(otherJobRoleField.value, jobRoleRegex) === false) {
-            console.log('job role false');
+            jobroleErrorDiv.innerHTML = jobRoleError;
             e.preventDefault()
         }
     }
@@ -192,29 +204,31 @@ registerButton.addEventListener('click', (e) => {
         }
     }
     if (count === 0) {
-        console.log('check activity');
+        activitiesErrorDiv.innerHTML = activitiesError;
         e.preventDefault()
+    } else {
+        activitiesErrorDiv.innerHTML = '';
     }
 
     if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'credit card') {
 
         if (validating(creditCardNumberField.value, creditCardRegex) === false) {
-            console.log('check credit card number');
+            cardErrorDiv.innerHTML = creditCardError;
             e.preventDefault()
         }
 
         if (validating(zipCodeField.value, zipRegex) === false) {
-            console.log('check zip code');
+            zipErrorDiv.innerHTML = zipError;
             e.preventDefault()
         }
 
         if (validating(cvvField.value, cvvRegex) === false) {
-            console.log('check credit card CVV');
+            cvvErrorDiv.innerHTML = cvvError;
             e.preventDefault()
         }
     } else if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'select method') {
         console.log('choose payment method');
-        e.preventDefault()
+        paymentErrorDiv.innerHTML = paymentError;
     }
 
 });
