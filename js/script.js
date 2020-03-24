@@ -25,7 +25,6 @@ let addingValue = 0;
 // Payment elements
 const paymentMethod = document.getElementById('payment');
 const creditCard = document.getElementById('credit-card');
-// creditCard.style.display = 'none';
 const paypal = document.getElementById('paypal');
 paypal.style.display = 'none';
 const bitcoin = document.getElementById('bitcoin');
@@ -140,7 +139,7 @@ jobRoleSelect.addEventListener('change', () => { //adding event listener for job
 
 // payment
 
-paymentMethodSelect.addEventListener('change', () => { //adding event listener for payment method select
+
     if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'credit card') {
         creditCardNumberField.addEventListener('keyup', () => { //adding event listener for credit card number field
             if (creditCardNumberField.value === '') { //checking if field is empty
@@ -173,7 +172,6 @@ paymentMethodSelect.addEventListener('change', () => { //adding event listener f
             }
         });
     }
-});
 
 //register button
 
