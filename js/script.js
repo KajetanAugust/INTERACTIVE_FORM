@@ -92,7 +92,7 @@ const zipRegex = /^[0-9]{5}$/;
 // VALIDATION FUNCTIONS //
 //////////////////////////
 
-const validating = (name, regexCode) => {
+const validating = (name, regexCode) => { //function for RegEx validation
     return regexCode.test(name)
 };
 
@@ -102,76 +102,74 @@ const validating = (name, regexCode) => {
 
 //name
 
-nameField.addEventListener('input', () => {
-    if (nameField.value === '') {
-        nameErrorDiv.innerHTML = nameError;
-    } else if (validating(nameField.value, nameRegex) === false) {
-        nameErrorDiv.innerHTML = nameWarning;
-    } else {
-        nameErrorDiv.innerHTML = '';
+nameField.addEventListener('input', () => { //adding event listener for name field
+    if (nameField.value === '') { //checking if field is empty
+        nameErrorDiv.innerHTML = nameError; //displaying error message
+    } else if (validating(nameField.value, nameRegex) === false) { //checking if RegEx validation is failed
+        nameErrorDiv.innerHTML = nameWarning; //displaying warning message
+    } else { //checking if validation is successful
+        nameErrorDiv.innerHTML = ''; //hiding message
     }
 });
 
 //email
 
-emailField.addEventListener('input', () => {
-    if (emailField.value === '') {
-        emailErrorDiv.innerHTML = emailError;
-    } else if (validating(emailField.value, emailRegex) === false) {
-        emailErrorDiv.innerHTML = emailWarning;
-    } else {
-        emailErrorDiv.innerHTML = '';
+emailField.addEventListener('input', () => { //adding event listener for email field
+    if (emailField.value === '') { //checking if field is empty
+        emailErrorDiv.innerHTML = emailError; //displaying error message
+    } else if (validating(emailField.value, emailRegex) === false) { //checking if RegEx validation is failed
+        emailErrorDiv.innerHTML = emailWarning; //displaying warning message
+    } else { //checking if validation is successful
+        emailErrorDiv.innerHTML = ''; //hiding message
     }
 });
 
 //job role
 
-jobRoleSelect.addEventListener('change', () => {
+jobRoleSelect.addEventListener('change', () => { //adding event listener for job role select
     if (jobRole.options[jobRole.selectedIndex].text.toLowerCase() === 'other') {
-        otherJobRoleField.addEventListener('input', () => {
-            if (validating(otherJobRoleField.value, jobRoleRegex) === false) {
-                jobroleErrorDiv.innerHTML = jobRoleError;
-            } else {
-                jobroleErrorDiv.innerHTML = '';
+        otherJobRoleField.addEventListener('input', () => { //adding event listener for job role field
+            if (validating(otherJobRoleField.value, jobRoleRegex) === false) { //if RegEx validation is failed
+                jobroleErrorDiv.innerHTML = jobRoleError; //displaying error message
+            } else { //checking if validation is successful
+                jobroleErrorDiv.innerHTML = ''; //hiding message
             }
         });
-    } else {
-        console.log('ok');
     }
 });
 
 // payment
 
-paymentMethodSelect.addEventListener('change', () => {
+paymentMethodSelect.addEventListener('change', () => { //adding event listener for payment method select
     if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'credit card') {
-        creditCardNumberField.addEventListener('keyup', () => {
-            if (creditCardNumberField.value === '') {
-                cardErrorDiv.innerHTML = creditCardError;
-            } else if (validating(creditCardNumberField.value, creditCardRegex) === false) {
-                cardErrorDiv.innerHTML = creditCardWarning;
-            } else {
-                cardErrorDiv.innerHTML = '';
+        creditCardNumberField.addEventListener('keyup', () => { //adding event listener for credit card number field
+            if (creditCardNumberField.value === '') { //checking if field is empty
+                cardErrorDiv.innerHTML = creditCardError; //displaying error message
+            } else if (validating(creditCardNumberField.value, creditCardRegex) === false) { //if RegEx validation is failed
+                cardErrorDiv.innerHTML = creditCardWarning; //displaying warning message
+            } else { //checking if validation is successful
+                cardErrorDiv.innerHTML = ''; //hiding message
             }
         });
 
 
-        zipCodeField.addEventListener('keyup', () => {
-            if (zipCodeField.value === '') {
-                zipErrorDiv.innerHTML = zipError;
-            } else if (validating(zipCodeField.value, zipRegex) === false) {
-                zipErrorDiv.innerHTML = zipWarning;
-            } else {
-                zipErrorDiv.innerHTML = '';
+        zipCodeField.addEventListener('keyup', () => { //adding event listener for zip code field
+            if (zipCodeField.value === '') { //checking if field is empty
+                zipErrorDiv.innerHTML = zipError; //displaying error message
+            } else if (validating(zipCodeField.value, zipRegex) === false) { //if RegEx validation is failed
+                zipErrorDiv.innerHTML = zipWarning; //displaying warning message
+            } else { //checking if validation is successful
+                zipErrorDiv.innerHTML = ''; //hiding message
             }
         });
 
-        cvvField.addEventListener('keyup', () => {
-            if (cvvField.value === '') {
-                cvvErrorDiv.innerHTML = cvvError;
-            } else if (validating(cvvField.value, cvvRegex) === false) {
-                cvvErrorDiv.innerHTML = cvvWarning;
-            } else {
-                cvvErrorDiv.innerHTML = '';
+        cvvField.addEventListener('keyup', () => { //adding event listener for cvv code field
+            if (cvvField.value === '') { //checking if field is empty
+                cvvErrorDiv.innerHTML = cvvError; //displaying error message
+            } else if (validating(cvvField.value, cvvRegex) === false) { //if RegEx validation is failed
+                cvvErrorDiv.innerHTML = cvvWarning; //displaying warning message
+            } else { //checking if validation is successful
+                cvvErrorDiv.innerHTML = ''; //hiding message
             }
         });
     }
@@ -179,56 +177,56 @@ paymentMethodSelect.addEventListener('change', () => {
 
 //register button
 
-registerButton.addEventListener('click', (e) => {
-    if (validating(nameField.value, nameRegex) === false) {
-        nameErrorDiv.innerHTML = nameError;
-        e.preventDefault()
+registerButton.addEventListener('click', (e) => { //adding event listener for register button
+    if (validating(nameField.value, nameRegex) === false) { //if RegEx validation is failed
+        nameErrorDiv.innerHTML = nameError; //displaying error message
+        e.preventDefault() //preventing form submission
     }
 
-    if (validating(emailField.value, emailRegex) === false) {
-        emailErrorDiv.innerHTML = emailError;
-        e.preventDefault()
+    if (validating(emailField.value, emailRegex) === false) { //if RegEx validation is failed
+        emailErrorDiv.innerHTML = emailError; //displaying error message
+        e.preventDefault() //preventing form submission
     }
 
     if (jobRole.options[jobRole.selectedIndex].text.toLowerCase() === 'other') {
-        if (validating(otherJobRoleField.value, jobRoleRegex) === false) {
-            jobroleErrorDiv.innerHTML = jobRoleError;
-            e.preventDefault()
+        if (validating(otherJobRoleField.value, jobRoleRegex) === false) { //if RegEx validation is failed
+            jobroleErrorDiv.innerHTML = jobRoleError; //displaying error message
+            e.preventDefault() //preventing form submission
         }
     }
 
-    let count = 0;
-    for (let i = 0; i < activitiesInputs.length; i++) {
-        if (activitiesInputs[i].checked) {
-            count++;
+    let count = 0; //count variable for checking activities
+    for (let i = 0; i < activitiesInputs.length; i++) { //looping through activities
+        if (activitiesInputs[i].checked) { //checking if activity was checked
+            count++; //adding one to the count variable
         }
     }
-    if (count === 0) {
-        activitiesErrorDiv.innerHTML = activitiesError;
-        e.preventDefault()
-    } else {
-        activitiesErrorDiv.innerHTML = '';
+    if (count === 0) { //checking if count is equal 0
+        activitiesErrorDiv.innerHTML = activitiesError; //displaying error message
+        e.preventDefault() //preventing form submission
+    } else { //checking if validation is successful
+        activitiesErrorDiv.innerHTML = ''; //hiding message
     }
 
-    if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'credit card') {
+    if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'credit card') { //checking if credit card payment was chosen
 
-        if (validating(creditCardNumberField.value, creditCardRegex) === false) {
-            cardErrorDiv.innerHTML = creditCardError;
-            e.preventDefault()
+        if (validating(creditCardNumberField.value, creditCardRegex) === false) { //if RegEx validation is failed
+            cardErrorDiv.innerHTML = creditCardError; //displaying error message
+            e.preventDefault() //preventing form submission
         }
 
-        if (validating(zipCodeField.value, zipRegex) === false) {
-            zipErrorDiv.innerHTML = zipError;
-            e.preventDefault()
+        if (validating(zipCodeField.value, zipRegex) === false) { //if RegEx validation is failed
+            zipErrorDiv.innerHTML = zipError; //displaying error message
+            e.preventDefault() //preventing form submission
         }
 
-        if (validating(cvvField.value, cvvRegex) === false) {
-            cvvErrorDiv.innerHTML = cvvError;
-            e.preventDefault()
+        if (validating(cvvField.value, cvvRegex) === false) { //if RegEx validation is failed
+            cvvErrorDiv.innerHTML = cvvError; //displaying error message
+            e.preventDefault() //preventing form submission
         }
-    } else if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'select method') {
-        console.log('choose payment method');
-        paymentErrorDiv.innerHTML = paymentError;
+    } else if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'select method') { //checking if payment was chosen
+        paymentErrorDiv.innerHTML = paymentError; //displaying error message
+        e.preventDefault() //preventing form submission
     }
 
 });
