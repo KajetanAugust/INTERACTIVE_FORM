@@ -128,8 +128,10 @@ emailField.addEventListener('input', () => { //adding event listener for email f
 jobRoleSelect.addEventListener('change', () => { //adding event listener for job role select
     if (jobRole.options[jobRole.selectedIndex].text.toLowerCase() === 'other') {
         otherJobRoleField.addEventListener('input', () => { //adding event listener for job role field
-            if (validating(otherJobRoleField.value, jobRoleRegex) === false) { //if RegEx validation is failed
+            if (otherJobRoleField.value === '') { //checking if field is empty
                 jobroleErrorDiv.innerHTML = jobRoleError; //displaying error message
+            } else if (validating(otherJobRoleField.value, jobRoleRegex) === false) { //if RegEx validation is failed
+                jobroleErrorDiv.innerHTML = jobRoleWarning; //displaying error message
             } else { //checking if validation is successful
                 jobroleErrorDiv.innerHTML = ''; //hiding message
             }
