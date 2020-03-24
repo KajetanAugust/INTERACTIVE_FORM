@@ -99,7 +99,7 @@ const validating = (name, regexCode) => { //function for RegEx validation
 // VALIDATION EVENT LISTENERS //
 ////////////////////////////////
 
-//name
+//NAME LIVE VALIDATION
 
 nameField.addEventListener('input', () => { //adding event listener for name field
     if (nameField.value === '') { //checking if field is empty
@@ -111,7 +111,7 @@ nameField.addEventListener('input', () => { //adding event listener for name fie
     }
 });
 
-//email
+//EMAIL LIVE VALIDATION
 
 emailField.addEventListener('input', () => { //adding event listener for email field
     if (emailField.value === '') { //checking if field is empty
@@ -123,7 +123,7 @@ emailField.addEventListener('input', () => { //adding event listener for email f
     }
 });
 
-//job role
+//JOB ROLE LIVE VALIDATION
 
 jobRoleSelect.addEventListener('change', () => { //adding event listener for job role select
     if (jobRole.options[jobRole.selectedIndex].text.toLowerCase() === 'other') {
@@ -137,8 +137,7 @@ jobRoleSelect.addEventListener('change', () => { //adding event listener for job
     }
 });
 
-// payment
-
+// PAYMENT LIVE VALIDATION
 
 if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'credit card') {
     creditCardNumberField.addEventListener('keyup', () => { //adding event listener for credit card number field
@@ -173,7 +172,7 @@ if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLower
     });
 }
 
-//register button
+//REGISTER BUTTON VALIDATION
 
 registerButton.addEventListener('click', (e) => { //adding event listener for register button
     if (validating(nameField.value, nameRegex) === false) { //if RegEx validation is failed
