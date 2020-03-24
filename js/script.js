@@ -194,8 +194,10 @@ registerButton.addEventListener('click', (e) => { //adding event listener for re
     }
 
     if (jobRole.options[jobRole.selectedIndex].text.toLowerCase() === 'other') {
-        if (validating(otherJobRoleField.value, jobRoleRegex) === false) { //if RegEx validation is failed
+        if (otherJobRoleField.value === '') { //checking if field is empty
             jobroleErrorDiv.innerHTML = jobRoleError; //displaying error message
+        } else if (validating(otherJobRoleField.value, jobRoleRegex) === false) { //if RegEx validation is failed
+            jobroleErrorDiv.innerHTML = jobRoleWarning; //displaying error message
             e.preventDefault() //preventing form submission
         }
     }
