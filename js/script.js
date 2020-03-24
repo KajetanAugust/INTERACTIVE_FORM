@@ -25,7 +25,7 @@ let addingValue = 0;
 // Payment elements
 const paymentMethod = document.getElementById('payment');
 const creditCard = document.getElementById('credit-card');
-creditCard.style.display = 'none';
+// creditCard.style.display = 'none';
 const paypal = document.getElementById('paypal');
 paypal.style.display = 'none';
 const bitcoin = document.getElementById('bitcoin');
@@ -318,8 +318,10 @@ paymentMethod.addEventListener('change', () => { //adding event listener for pay
             creditCard.style.display = ''; //showing credit card payment method
         } else if (paymentChoice === 'paypal') { //checking if paypal is selected
             paypal.style.display = ''; //showing paypal payment method
+            creditCard.style.display ='none'
         } else if (paymentChoice === 'bitcoin') { //checking if bitcoin is selected
             bitcoin.style.display = ''; //showing bitcoin payment method
+            creditCard.style.display ='none'
         }
     }
 });
