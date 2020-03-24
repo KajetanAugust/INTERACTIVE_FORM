@@ -175,13 +175,19 @@ if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLower
 //REGISTER BUTTON VALIDATION
 
 registerButton.addEventListener('click', (e) => { //adding event listener for register button
-    if (validating(nameField.value, nameRegex) === false) { //if RegEx validation is failed
+    if (nameField.value === '') { //checking if field is empty
         nameErrorDiv.innerHTML = nameError; //displaying error message
+        e.preventDefault() //preventing form submission
+    } else if (validating(nameField.value, nameRegex) === false) { //if RegEx validation is failed
+        nameErrorDiv.innerHTML = nameWarning; //displaying error message
         e.preventDefault() //preventing form submission
     }
 
-    if (validating(emailField.value, emailRegex) === false) { //if RegEx validation is failed
+    if (emailField.value === '') { //checking if field is empty
         emailErrorDiv.innerHTML = emailError; //displaying error message
+        e.preventDefault() //preventing form submission
+    } else if (validating(emailField.value, emailRegex) === false) { //if RegEx validation is failed
+        emailErrorDiv.innerHTML = emailWarning; //displaying error message
         e.preventDefault() //preventing form submission
     }
 
@@ -207,18 +213,27 @@ registerButton.addEventListener('click', (e) => { //adding event listener for re
 
     if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'credit card') { //checking if credit card payment was chosen
 
-        if (validating(creditCardNumberField.value, creditCardRegex) === false) { //if RegEx validation is failed
+        if (creditCardNumberField.value === '') { //checking if field is empty
             cardErrorDiv.innerHTML = creditCardError; //displaying error message
             e.preventDefault() //preventing form submission
-        }
-
-        if (validating(zipCodeField.value, zipRegex) === false) { //if RegEx validation is failed
-            zipErrorDiv.innerHTML = zipError; //displaying error message
+        }else if (validating(creditCardNumberField.value, creditCardRegex) === false) { //if RegEx validation is failed
+            cardErrorDiv.innerHTML = creditCardWarning; //displaying error message
             e.preventDefault() //preventing form submission
         }
 
-        if (validating(cvvField.value, cvvRegex) === false) { //if RegEx validation is failed
+        if (zipCodeField.value === '') { //checking if field is empty
+            zipErrorDiv.innerHTML = zipError; //displaying error message
+            e.preventDefault() //preventing form submission
+        } else if (validating(zipCodeField.value, zipRegex) === false) { //if RegEx validation is failed
+            zipErrorDiv.innerHTML = zipWarning; //displaying error message
+            e.preventDefault() //preventing form submission
+        }
+
+        if (cvvField.value === '') { //checking if field is empty
             cvvErrorDiv.innerHTML = cvvError; //displaying error message
+            e.preventDefault() //preventing form submission
+        } else if (validating(cvvField.value, cvvRegex) === false) { //if RegEx validation is failed
+            cvvErrorDiv.innerHTML = cvvWarning; //displaying error message
             e.preventDefault() //preventing form submission
         }
     } else if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'select method') { //checking if payment was chosen
