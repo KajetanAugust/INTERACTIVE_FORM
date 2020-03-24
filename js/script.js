@@ -140,38 +140,38 @@ jobRoleSelect.addEventListener('change', () => { //adding event listener for job
 // payment
 
 
-    if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'credit card') {
-        creditCardNumberField.addEventListener('keyup', () => { //adding event listener for credit card number field
-            if (creditCardNumberField.value === '') { //checking if field is empty
-                cardErrorDiv.innerHTML = creditCardError; //displaying error message
-            } else if (validating(creditCardNumberField.value, creditCardRegex) === false) { //if RegEx validation is failed
-                cardErrorDiv.innerHTML = creditCardWarning; //displaying warning message
-            } else { //checking if validation is successful
-                cardErrorDiv.innerHTML = ''; //hiding message
-            }
-        });
+if (paymentMethodSelect.options[paymentMethodSelect.selectedIndex].value.toLowerCase() === 'credit card') {
+    creditCardNumberField.addEventListener('keyup', () => { //adding event listener for credit card number field
+        if (creditCardNumberField.value === '') { //checking if field is empty
+            cardErrorDiv.innerHTML = creditCardError; //displaying error message
+        } else if (validating(creditCardNumberField.value, creditCardRegex) === false) { //if RegEx validation is failed
+            cardErrorDiv.innerHTML = creditCardWarning; //displaying warning message
+        } else { //checking if validation is successful
+            cardErrorDiv.innerHTML = ''; //hiding message
+        }
+    });
 
 
-        zipCodeField.addEventListener('keyup', () => { //adding event listener for zip code field
-            if (zipCodeField.value === '') { //checking if field is empty
-                zipErrorDiv.innerHTML = zipError; //displaying error message
-            } else if (validating(zipCodeField.value, zipRegex) === false) { //if RegEx validation is failed
-                zipErrorDiv.innerHTML = zipWarning; //displaying warning message
-            } else { //checking if validation is successful
-                zipErrorDiv.innerHTML = ''; //hiding message
-            }
-        });
+    zipCodeField.addEventListener('keyup', () => { //adding event listener for zip code field
+        if (zipCodeField.value === '') { //checking if field is empty
+            zipErrorDiv.innerHTML = zipError; //displaying error message
+        } else if (validating(zipCodeField.value, zipRegex) === false) { //if RegEx validation is failed
+            zipErrorDiv.innerHTML = zipWarning; //displaying warning message
+        } else { //checking if validation is successful
+            zipErrorDiv.innerHTML = ''; //hiding message
+        }
+    });
 
-        cvvField.addEventListener('keyup', () => { //adding event listener for cvv code field
-            if (cvvField.value === '') { //checking if field is empty
-                cvvErrorDiv.innerHTML = cvvError; //displaying error message
-            } else if (validating(cvvField.value, cvvRegex) === false) { //if RegEx validation is failed
-                cvvErrorDiv.innerHTML = cvvWarning; //displaying warning message
-            } else { //checking if validation is successful
-                cvvErrorDiv.innerHTML = ''; //hiding message
-            }
-        });
-    }
+    cvvField.addEventListener('keyup', () => { //adding event listener for cvv code field
+        if (cvvField.value === '') { //checking if field is empty
+            cvvErrorDiv.innerHTML = cvvError; //displaying error message
+        } else if (validating(cvvField.value, cvvRegex) === false) { //if RegEx validation is failed
+            cvvErrorDiv.innerHTML = cvvWarning; //displaying warning message
+        } else { //checking if validation is successful
+            cvvErrorDiv.innerHTML = ''; //hiding message
+        }
+    });
+}
 
 //register button
 
@@ -316,10 +316,10 @@ paymentMethod.addEventListener('change', () => { //adding event listener for pay
             creditCard.style.display = ''; //showing credit card payment method
         } else if (paymentChoice === 'paypal') { //checking if paypal is selected
             paypal.style.display = ''; //showing paypal payment method
-            creditCard.style.display ='none'
+            creditCard.style.display = 'none'
         } else if (paymentChoice === 'bitcoin') { //checking if bitcoin is selected
             bitcoin.style.display = ''; //showing bitcoin payment method
-            creditCard.style.display ='none'
+            creditCard.style.display = 'none'
         }
     }
 });
