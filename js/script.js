@@ -77,7 +77,7 @@ const cvvErrorDiv = document.getElementById('cvv-alert-div');
 
 // regex codes
 
-const nameRegex = /^[a-z]{3,}$/;
+const nameRegex = /[a-z]{3,}/;
 const emailRegex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 const jobRoleRegex = /\w{3,}/;
 const creditCardRegex = /^\d{13,16}$/;
